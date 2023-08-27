@@ -182,7 +182,7 @@ const createHourlyForecastcards = (hourforecast, index) =>{
 //fucntion for get weather details form coordinates.............
 
 const getWeatherDetails = (name,lat,lon) =>{
-    const weatherurl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+    const weatherurl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
     
     fetch(weatherurl).then(res => res.json()).then(data => {
         // console.log(data);
@@ -238,7 +238,7 @@ const getCityCoordinate = () =>{
     const cityName = input.value
     // console.log(cityName)
     // if(!cityName) return;
-    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=28c2b467e5bc6dee079a32184988da3c`
+    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=28c2b467e5bc6dee079a32184988da3c`
 
     fetch(geoUrl).then(res => res.json()).then(data => {
         const {name, lat, lon} = data[0];
@@ -256,7 +256,7 @@ const getuserCoordinates = () =>{
     position => {
     // console.log(position.coords)
    const {latitude,longitude} = position.coords
-    const ReverseGeocoding = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
+    const ReverseGeocoding = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
     fetch(ReverseGeocoding).then(res => res.json()).then(data =>{
       // console.log(data[0].name);
      const usercityName = data[0].name
