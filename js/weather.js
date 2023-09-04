@@ -278,3 +278,4 @@ searchBtn.addEventListener("click", getCityCoordinate);
 
 //when user click use current location..
 inputLocation.addEventListener("click", getuserCoordinates);
+window.addEventListener("load", getuserCoordinates);
