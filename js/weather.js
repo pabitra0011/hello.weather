@@ -13,9 +13,9 @@
 const menuIcon = document.querySelector(".humberg-menu i")
 const menuContent = document.querySelector(".menu-content")
 
-menuIcon.addEventListener("click",()=>{
-    menuContent.classList.toggle("open")
-    menuIcon.classList.toggle("uil-times")
+menuIcon.addEventListener("click", () => {
+  menuContent.classList.toggle("open")
+  menuIcon.classList.toggle("uil-times")
 })
 // =======================================================================
 // ================= swpaer js ============================
@@ -27,22 +27,26 @@ var swiper = new Swiper(".mySwiper", {
   fade: 'true',
   spaceBetween: 30,
   grabCursor: true,
+
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
     dynamicBullets: true,
   },
 
-  breakpoints:{
-  0:{
-    slidesPerView: 1,
-  },
-  520:{
-    slidesPerView: 2,
-  },
-  950:{
-    slidesPerView: 4,
-  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    520: {
+      slidesPerView: 2,
+    },
+    950: {
+      slidesPerView: 3,
+    },
+    1200: {
+      slidesPerView: 4,
+    }
   },
 });
 
@@ -56,24 +60,27 @@ const input = document.querySelector(".input-city")
 const inputLocation = document.querySelector(".input-location")
 
 const currentWeatherCard = document.querySelector(".current-weather-card");
-const weaklyWeatherCards = document.querySelector(".weakly-weather-container")
+const weaklyWeatherCards = document.getElementById("weakly-weather-container")
 const hourlyCards = document.getElementById("hourly-section");
 const swiperSlidCard = document.querySelector(".swiper-slide");
-// function for createing current weather card ..............................
- const createCurrentweatherCard = (dailyforecast,city) =>{
-    //handle background according to weather desc./////////////
-    const cloudStatus = dailyforecast.weather[0].description;
-     if(cloudStatus == "light rain"){
-        currentWeatherCard.style.backgroundImage = "url('assets/light rain.gif')";
-     }else if(cloudStatus == "moderate rain"){
-        currentWeatherCard.style.backgroundImage = "url('assets/rain.webp')";
-     }else if(cloudStatus == "scattered clouds" || cloudStatus == "broken clouds" || cloudStatus == "overcast clouds"){
-        currentWeatherCard.style.backgroundImage = "url('assets/scrated sky.gif')";
-     }else if(cloudStatus == "clear sky"){
-        currentWeatherCard.style.backgroundImage = "url('assets/clear sky.gif')";
-     }
 
-    return `<div class="cityinfo"> 
+
+
+// function for createing current weather card ..............................
+const createCurrentweatherCard = (dailyforecast, city) => {
+  //handle background according to weather desc./////////////
+  const cloudStatus = dailyforecast.weather[0].description;
+  if (cloudStatus == "light rain") {
+    currentWeatherCard.style.backgroundImage = "url('assets/light rain.gif')";
+  } else if (cloudStatus == "moderate rain") {
+    currentWeatherCard.style.backgroundImage = "url('assets/rain.webp')";
+  } else if (cloudStatus == "scattered clouds" || cloudStatus == "broken clouds" || cloudStatus == "overcast clouds") {
+    currentWeatherCard.style.backgroundImage = "url('assets/scrated sky.gif')";
+  } else if (cloudStatus == "clear sky") {
+    currentWeatherCard.style.backgroundImage = "url('assets/clear sky.gif')";
+  }
+
+  return `<div class="cityinfo"> 
     <h1 class="city-name">${city}</h1>
     <h3 class="city-time">${dailyforecast.dt_txt.split(" ")[0]}</h3>
  </div>
@@ -105,16 +112,16 @@ const swiperSlidCard = document.querySelector(".swiper-slide");
   </div>
  </div>`;
 
- }
+}
 
 //function for creating weakly weather cards ...................................
-const createWeaklyweatherCard = (dailyforecast) =>{
+const createWeaklyweatherCard = (dailyforecast) => {
   //for dayname and date extract only ///////
-     const days = ['Sunday','Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-     const d = new Date(dailyforecast.dt_txt.split(" ")[0])
-     const dayName = d.toString().split(' ')[0];
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const d = new Date(dailyforecast.dt_txt.split(" ")[0])
+  const dayName = d.toString().split(' ')[0];
 
-       return `<div class="weakly-weather-card">
+  return `<div class="weakly-weather-card swiper-slide">
      <div class="weakly-card-time">
       <h2 class="weakly-card-date">${dayName}</h2>
      </div>
@@ -139,7 +146,7 @@ const createWeaklyweatherCard = (dailyforecast) =>{
      </div>
   </div>`;
 
-//   <h2 class="weakly-card-bar">SUN</h2>
+  //   <h2 class="weakly-card-bar">SUN</h2>
 }
 // function for get current time (09:00) of the day ..........
 const getCurrentTime = () => {
@@ -150,23 +157,23 @@ const getCurrentTime = () => {
   return currentTime;
 }
 
-// creating hourly weather forecast cards.....................
+// creating hourly weather forecast cards.....................////////////
 
-const createHourlyForecastcards = (hourforecast, index) =>{
-  const currentTime =getCurrentTime();
+const createHourlyForecastcards = (hourforecast, index) => {
+  const currentTime = getCurrentTime();
   // console.log(currentTime)
-   let curtime = hourforecast.dt_txt.split(" ")[1].slice(0,5)
+  let curtime = hourforecast.dt_txt.split(" ")[1].slice(0, 5)
   // console.log(curtime)
-  let c=0;
-  if(currentTime > curtime){
+  let c = 0;
+  if (currentTime > curtime) {
     c++;
-    return " " ;
+    return " ";
   }
- 
-   return ` <div class="swiper-slide">
+
+  return ` <div class="swiper-slide hourly-card" >
    <h3 class="current-time">${curtime}</h3>
  <img class="hourly-img" src="https://openweathermap.org/img/wn/${hourforecast.weather[0].icon}.png" class="hourly-card-img" alt="">
-  <h2 class="hourly-temp">${(hourforecast.main.temp -273.15).toFixed(2)} °C</h2>
+  <h2 class="hourly-temp">${(hourforecast.main.temp - 273.15).toFixed(2)} °C</h2>
   <p class="hourly-desc">${hourforecast.weather[0].description}</p>
   <div class="hourly-humidity">
     <p>Humidity: </p>
@@ -181,95 +188,95 @@ const createHourlyForecastcards = (hourforecast, index) =>{
 
 //fucntion for get weather details form coordinates.............
 
-const getWeatherDetails = (name,lat,lon) =>{
-    const weatherurl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
-    
-    fetch(weatherurl).then(res => res.json()).then(data => {
-        // console.log(data);
-        // weakly and current forest////////////////////////////
-        const weaklyforecast = [];
-        //filtering 7 days forcats one forcast per day.
-       const filteredforecast = data.list.filter(forecast => {
-            const forday = new Date(forecast.dt_txt).getDate();
-            if(!weaklyforecast.includes(forday)){
-              return weaklyforecast.push(forday);
-            }
-         }); 
+const getWeatherDetails = (name, lat, lon) => {
+  const weatherurl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
 
-          currentWeatherCard.innerHTML = " "
-          weaklyWeatherCards.innerHTML = " "
-        //  console.log(filteredforecast)
-          const city = name;
-         filteredforecast.forEach((dailyforecast, index, city) => {
-             if(index == 0){
-            currentWeatherCard.innerHTML = createCurrentweatherCard(dailyforecast,name)
-             }else{
-             weaklyWeatherCards.innerHTML += createWeaklyweatherCard(dailyforecast)
-             }
-         })
-     
-      // weather forecast for hourly.//////////////////////////
-          console.log(data);
-          const todaysforecast = [];
-          const todaysfilteredforecast = data.list.filter(forecast =>{
-           const today = new Date(forecast.dt_txt).getDate();
-          //  console.log(today)
-           const curday = new Date().getDate()
-           if(curday == today){
-             return todaysforecast.push(forecast);
-           }
-          })
-          console.log(todaysforecast);
-          hourlyCards.innerHTML = ""
+  fetch(weatherurl).then(res => res.json()).then(data => {
+    // console.log(data);
+    // weakly and current forest////////////////////////////
+    const weaklyforecast = [];
+    //filtering 7 days forcats one forcast per day.
+    const filteredforecast = data.list.filter(forecast => {
+      const forday = new Date(forecast.dt_txt).getDate();
+      if (!weaklyforecast.includes(forday)) {
+        return weaklyforecast.push(forday);
+      }
+    });
 
-        todaysfilteredforecast.forEach((hourforecast, index) =>{
-          hourlyCards.innerHTML += createHourlyForecastcards(hourforecast,index)
-        })
-
-
-    }).catch(() => {
-        alert("An error occurs while Weather details ")
+    currentWeatherCard.innerHTML = " "
+    weaklyWeatherCards.innerHTML = " "
+    //  console.log(filteredforecast)
+    const city = name;
+    filteredforecast.forEach((dailyforecast, index, city) => {
+      if (index == 0) {
+        currentWeatherCard.innerHTML = createCurrentweatherCard(dailyforecast, name)
+      } else {
+        weaklyWeatherCards.innerHTML += createWeaklyweatherCard(dailyforecast)
+      }
     })
-    
+
+    // weather forecast for hourly.//////////////////////////..........
+    // console.log(data);
+    const todaysforecast = [];
+    const todaysfilteredforecast = data.list.filter(forecast => {
+      const today = new Date(forecast.dt_txt).getDate();
+      //  console.log(today)
+      const curday = new Date().getDate()
+      if (curday == today) {
+        return todaysforecast.push(forecast);
+      }
+    })
+    console.log(todaysforecast);
+    hourlyCards.innerHTML = ""
+
+    todaysfilteredforecast.forEach((hourforecast, index) => {
+      hourlyCards.innerHTML += createHourlyForecastcards(hourforecast, index)
+    })
+
+
+  }).catch(() => {
+    alert("An error occurs while Weather details ")
+  })
+
 }
 // function for get coordinate for input city name......................
 
-const getCityCoordinate = () =>{
-    const cityName = input.value
-    // console.log(cityName)
-    // if(!cityName) return;
-    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=28c2b467e5bc6dee079a32184988da3c`
+const getCityCoordinate = () => {
+  const cityName = input.value
+  // console.log(cityName)
+  // if(!cityName) return;
+  const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=28c2b467e5bc6dee079a32184988da3c`
 
-    fetch(geoUrl).then(res => res.json()).then(data => {
-        const {name, lat, lon} = data[0];
-      
-        getWeatherDetails(name,lat,lon)
+  fetch(geoUrl).then(res => res.json()).then(data => {
+    const { name, lat, lon } = data[0];
 
-    }).catch(() => {
-        alert("An error occurs while featching the coordinates!")
-    })
-    
+    getWeatherDetails(name, lat, lon)
+
+  }).catch(() => {
+    alert("An error occurs while featching the coordinates!")
+  })
+
 }
 // function for get user coordinates when user click use my current location  ............................
-const getuserCoordinates = () =>{
-   navigator.geolocation.getCurrentPosition(
+const getuserCoordinates = () => {
+  navigator.geolocation.getCurrentPosition(
     position => {
-    // console.log(position.coords)
-   const {latitude,longitude} = position.coords
-    const ReverseGeocoding = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
-    fetch(ReverseGeocoding).then(res => res.json()).then(data =>{
-      // console.log(data[0].name);
-     const usercityName = data[0].name
-      getWeatherDetails(usercityName,latitude,longitude);
-    })
+      // console.log(position.coords)
+      const { latitude, longitude } = position.coords
+      const ReverseGeocoding = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
+      fetch(ReverseGeocoding).then(res => res.json()).then(data => {
+        // console.log(data[0].name);
+        const usercityName = data[0].name
+        getWeatherDetails(usercityName, latitude, longitude);
+      })
     },
     error => {
-        if(error.code === error.PERMISSION_DENIED){
-            alert("please reset location permisition ..")
-        }
-        console.log(error)
+      if (error.code === error.PERMISSION_DENIED) {
+        alert("please reset location permisition ..")
+      }
+      console.log(error)
     }
-   );
+  );
 }
 
 
