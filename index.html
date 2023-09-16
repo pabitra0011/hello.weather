@@ -44,9 +44,14 @@
 
 <!-- city input section ============================================================ -->
   <div class="input-section">
-    <label for="city">~Check Weather by City~</label>
-    <input class="input-city" type="text" value="" placeholder="Enter City Name">
-    <button type="submit" class="city-submit">Search</button>
+    <!-- <label for="city">~Check Weather by City~</label> -->
+    <!-- <input class="input-city" type="text" value="" placeholder="Enter City Name">
+    <button type="submit" class="city-submit">Search</button> -->
+    <div class="search-bar">
+      <input type="text" class="input-city">
+      <i class="uil uil-search city-submit"></i>
+    </div>
+
     <div class="separator"></div>
     <button type="submit" class="input-location">Use current location</button>
      
@@ -55,37 +60,7 @@
    <div class="current-weather-section">
 
     <div class="current-weather-card">
-<!--          <div class="cityinfo"> 
-            <h1 class="city-name">CityName</h1>
-            <h3 class="city-time">00 00</h3>
-         </div>
-         <div class="city-temp">
-          <img class="current-weather-img" src="" alt="png">
-           <h1 class="temp-value">00 C</h1>
-         </div>
-         <div class="desc"> <p>Clear Sky</p> </div>
-         <div class="other-details">
-          <div class="firstline-details">
-            <div class="humidity">
-              <h1>00%</h1>
-              <p>humidity</p>
-            </div>
-            <div class="windspeed">
-              <h1>00 km/h</h1>
-              <p>Wind speed</p>
-            </div>
-          </div>
-          <div class="lastline-details">
-            <div class="feellikes">
-              <h1>00 C</h1>
-              <p>Feels like</p>
-            </div>
-            <div class="pressure">
-              <h1>0000</h1>
-              <p>pressure</p>
-            </div>
-          </div>
-         </div> -->
+       
     </div>
     <!-- end of weather card  -->
     
@@ -118,46 +93,25 @@
         </div>
         <div class="swiper-pagination"></div>
       </div>
-    
+
+       
+
     </div>
 <!-- end of current section  -->
 </div>
 
 
   <!-- =========================== weakly weather update ========================== -->
-
-     <div class="weakly-weather-section">
+ <div class="weakly-weather-section">
      <h1>5 Days Weather Forecast</h1>
+ <!-- Swiper -->
+      <div class="swiper mySwiper">
+      <div class="swiper-wrapper"  id="weakly-weather-container">
 
-      <div class="weakly-weather-container">
-
-<!--         <div class="weakly-weather-card">
-           <div class="weakly-card-time">
-            <h2 class="weakly-card-bar">___</h2>
-            <h2 class="weakly-card-date">__</h2>
-           </div>
-           <div class="weakly-card-temp">
-            <img id="defaultImg" src="assets/cloud img.png" class="weakly-card-img" alt="">
-            <h2 class="weakly-temp"></h2>
-           </div>
-            <p class="weakly-card-desc">Clear sky</p>
-           <div class="weakly-card-others">
-            <div class="weakly-card-left">
-              <h2 class="weakly-card-humidity">00</h2>
-              <p>Humidity</p>
-              <h2 class="weakly-card-wind"> 00km/h</h2>
-              <p>Wind speed</p>
-            </div>
-            <div class="weakly-card-left">
-              <h2 class="weakly-card-feels">00 C</h2>
-              <p>Feels like</p>
-              <h2 class="weakly-card-pressure">00P</h2>
-              <p>Pressure</p>
-            </div>
-           </div>
-        </div> -->
          <!-- end of card  -->
     
+      </div>
+       <div class="swiper-pagination"></div>
       </div>
 
      </div>
@@ -214,5 +168,6 @@
 
    <!-- main js ...... -->
     <script src="js/weather.js"></script>
+    <script src="test.js"></script>
 </body>
 </html>
