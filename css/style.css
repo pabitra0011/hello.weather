@@ -32,11 +32,16 @@ nav ul li{
     /* border: 1px solid red; */
     padding: 0.5rem;
     border-radius: 20px;
+
 }
 nav ul li a{
     text-decoration: none;
     font-size: 1.3rem;
     color: white;
+}
+nav ul li a:hover{
+    color: brown;
+    
 }
 
 /* menu bar content.................. .........
